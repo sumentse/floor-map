@@ -1,0 +1,30 @@
+<div ng-show="structure.length > 0">
+	<h2>Floor Map</h2>
+    <div id="ui-controls">
+<!--         <div id="floor-picker">
+            <label for="floorlevels">Floor: </label>
+            <select name="floorlevels" id="floorlevels" ng-options="building.name.replace('Floor_','') for building in structure" ng-model="navState.level" ng-change="renderFloor(navState.level.name)"></select>
+        </div> -->
+        <div id="room-picker" ng-class="{'invisible':navState.level && navState.level.rooms.length <= 5}">
+            <label for="rooms">Room: </label>
+            <select ng-change="renderRoom(navState.room.name)" name="rooms" id="rooms" ng-options="room.name.replace('RM_','') for room in navState.level.rooms" ng-model="navState.room"></select>
+        </div>
+        <div id="reset-view">
+             <span ng-click="resetView()">Reset View</span>
+        </div>
+        <br>
+        <br>
+    </div>
+    <div id="main-content">
+        <div id="elevator">
+            <div id="current-floor">
+                <div ng-bind="navState.level.name.replace('Floor_','')"></div>
+                <p>Current Floor</p>
+            </div>
+            <div id="button-panel">
+                <div class="elevator-buttons" ng-repeat="floor in structure" ng-bind="floor.name.replace('Floor_','')" ng-click="renderFloor(floor.name)"></div>
+            </div>
+        </div>
+        <div id="svg-container"></div>
+    </div>
+</div>
